@@ -1,0 +1,28 @@
+Radius Configuration
+--------------------
+
+aaa new-model
+username admin priv 15 password admin
+aaa authentication enable default group radius local
+aaa authentication login default group radius local
+
+radius-ser host 192.168.1.100 key cisco
+line vty 0 4
+transport input all
+login authentication default
+
+
+Tacacs+ Configuration
+---------------------
+en
+conf t
+
+aaa new-model
+tacacs-server host 10.0.0.100 key cisco
+aaa authentication login default group tacacs+ local
+line console 0
+login authentication default
+exit
+line vty 0 4
+login authentication default
+exit
