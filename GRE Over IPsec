@@ -6,7 +6,7 @@ int tunnel 1
 ip add 1.0.0.1 255.0.0.0
 tunnel source e0/0
 tunnel destination 192.1.10.1
-exit
+
 ip route 10.1.1.0 255.255.255.0 tunnel 1
 
 
