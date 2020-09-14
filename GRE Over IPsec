@@ -88,9 +88,8 @@ set transform-set myset
 match address 100
 exit
 
-int g0/0
+int g0/1
 crypto map mymap
 end	
 
 
-Change the tunnel source of branch
