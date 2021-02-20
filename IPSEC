@@ -1,4 +1,53 @@
-aaaaa
+IPSEC Phase I Site-1
+--------------------
+
+en
+conf t
+crypto isakmp policy 1
+hash md5 
+authentication pre-share 
+group 2
+lifetime 86400
+encryption 3des 
+exit
+crypto isakmp key admin_123 address 200.1.1.1
+
+Phase II
+--------
+crypto ipsec transform-set myset esp-3des esp-md5-hmac
+access-list 150 permit ip 192.168.1.0 0.0.0.255 10.1.1.0 0.0.0.63
+crypto map mymap 1 ipsec-isakmp 
+set transform-set myset
+set peer 200.1.1.1
+match address 150
+exit
+int g0/0
+crypto map mymap
+exit
 
 
-IP access-list
+IPSEC Phase I Site-2
+--------------------
+en
+conf t
+crypto isakmp policy 1
+hash md5 
+authentication pre-share 
+group 2
+lifetime 86400
+encryption 3des 
+exit
+crypto isakmp key admin_123 address 199.1.1.1
+
+Phase II
+--------
+crypto ipsec transform-set myset esp-3des esp-md5-hmac
+access-list 150 permit ip 10.1.1.0 0.0.0.63 192.168.1.0 0.0.0.255
+crypto map mymap 1 ipsec-isakmp 
+set transform-set myset
+set peer 199.1.1.1
+match address 150
+exit
+int g0/0
+crypto map mymap
+exit
